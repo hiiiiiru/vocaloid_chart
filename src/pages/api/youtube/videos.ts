@@ -19,7 +19,7 @@ export default async function index(req: NextApiRequest, res: NextApiResponse) {
         res.status(204).json({ message: "No Data", data: {} })
       }
     } catch (error) {
-      console.log({ error })
+      console.log({ error: error?.response?.body ?? error })
       return res.status(500).json({ error: "internal server error" })
     }
   } else {

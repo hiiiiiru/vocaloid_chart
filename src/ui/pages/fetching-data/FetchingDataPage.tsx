@@ -39,7 +39,7 @@ const FetchingDataPage = () => {
   async function makingWeekStatistic() {
     try {
       setIsMakingNewStatistics(true)
-      await init.initWeekStatistic(16)
+      await init.initWeekStatistic(24)
       setIsMakingNewStatistics(false)
     } catch (e) {
       setIsMakingNewStatistics(false)
@@ -49,11 +49,11 @@ const FetchingDataPage = () => {
   async function makingChart() {
     try {
       setIsMakingChart(true)
-      const data = await chart.chartMaker(16)
+      const data = await chart.chartMaker(24)
       setIsMakingChart(false)
 
-      exportFromJSON({ data, fileName: "chart_oct_16", exportType: "csv" })
-      exportFromJSON({ data, fileName: "chart_oct_16", exportType: "json" })
+      exportFromJSON({ data, fileName: "chart_jan_08_22", exportType: "csv" })
+      exportFromJSON({ data, fileName: "chart_jan_08_22", exportType: "json" })
     } catch (e) {
       setIsMakingChart(false)
     }

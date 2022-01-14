@@ -152,8 +152,8 @@ export default class ChartService {
             videoTitle: thisWeekElement.title ?? thisWeekElement.originalTitle,
             uploadDate: thisWeekElement.uploadDate,
             thumbnail: thisWeekElement?.picture,
-            isNew: !(now.diff(uploadMoment, "days") > 7),
-            score: now.diff(uploadMoment, "days") > 8 ? 0 : score,
+            isNew: !(now.diff(uploadMoment, "days") > 28),
+            score: now.diff(uploadMoment, "days") > 29 ? 0 : score,
             viewCount: thisWeekElement.views,
             likeCount: thisWeekElement.likes ?? 0,
             commentCount: thisWeekElement.comment ?? 0,
@@ -165,7 +165,7 @@ export default class ChartService {
         }
       }
 
-      return chart
+      return chart.sort((a, b) => b.score - a.score)
     } catch (e) {
       console.log(e)
     }
@@ -328,7 +328,7 @@ export default class ChartService {
           charts.push({
             id: video.videoYoutubeId,
             artist: video.customArtist,
-            isNew: !(now.diff(uploadMoment, "days") > 8),
+            isNew: element.weeksInChart < 2 && now.diff(uploadMoment, "days") < 8,
             weeksInChart: element.weeksInChart,
             score: currentPerformance.score,
             currentPosition: currentPerformance.position,
