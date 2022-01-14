@@ -10,12 +10,16 @@ export default async function artist_with_youtube_channels(
     console.log(query)
 
     try {
-      const response = await got("https://vocadb.net/api/artists")
+      const response = await got("https://vocadb.net/api/artists?allowBaseVoicebanks=true&maxResults=100&getTotalCount=true&sort=AdditionDate&fields=WebLinks")
 
       if (response.statusCode === 200) {
         const body = JSON.parse(response.body)
+        const items = body.items
+        const length= items.length
 
-        res.status(200).json(body)
+        res.status(200).json({
+          length, items
+        })
       } else {
         res.status(204).json([])
       }
